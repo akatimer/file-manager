@@ -1,5 +1,4 @@
 import fs from 'fs';
-import path from 'path';
 
 const cp = async (filePath, newFilePath) => {
   const fileStream = fs.createReadStream(filePath);
@@ -11,7 +10,11 @@ const cp = async (filePath, newFilePath) => {
     console.log(`File copied`);
   });
 
-  fileStream.on('error', (err) => {
+  fileStream.on('error', () => {
+    console.error('Operation failed');
+  });
+
+  newFileStream.on('error', () => {
     console.error('Operation failed');
   });
 
