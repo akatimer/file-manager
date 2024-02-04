@@ -1,4 +1,5 @@
 import readline from 'readline';
+import up from './up/up.js';
 
 const fileManager = async () => {
   const userName = process.env.npm_config_username;
@@ -21,6 +22,8 @@ const fileManager = async () => {
   rl.on('line', async (data) => {
     if (data === '.exit') {
       rl.close();
+    } else if (data === 'up') {
+      await up();
     }
   });
   rl.on('close', async () => {
