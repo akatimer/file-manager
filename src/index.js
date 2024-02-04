@@ -10,6 +10,8 @@ import mv from './mv/mv.js';
 import rm from './rm/rm.js';
 import operationSystem from './os/os.js';
 import hash from './hash/hash.js';
+import compress from './arhive/compress.js';
+import decompress from './arhive/decompress.js';
 
 const fileManager = async () => {
   const userName = process.env.npm_config_username;
@@ -22,6 +24,7 @@ const fileManager = async () => {
 
   if (!userName) {
     console.error('Use: "npm run start --username=your_username"');
+    process.exit(1);
   } else {
     console.log(`Welcome to the File Manager, ${userName}!`);
   }
@@ -55,9 +58,15 @@ const fileManager = async () => {
         operationSystem(data.split(' ')[1]);
       } else if (data.startsWith('hash ')) {
         hash(data.split(' ')[1]);
+      } else if (data.startsWith('compress ')) {
+        compress(data.split(' ')[1], data.split(' ')[2]);
+      } else if (data.startsWith('decompress ')) {
+        decompress(data.split(' ')[1], data.split(' ')[2]);
+      } else {
+        console.log('Invalid input');
       }
-    } catch (err) {
-      console.log('Invalid input' + err);
+    } catch {
+      console.log('Invalid input');
     }
   });
   rl.on('close', async () => {

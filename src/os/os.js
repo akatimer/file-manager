@@ -14,6 +14,7 @@ const operationSystem = (command) => {
   } else {
     console.log('Invalid input');
   }
+  console.log(`You are currently in ${process.cwd()}`);
 };
 
 export default operationSystem;

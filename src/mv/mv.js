@@ -8,16 +8,16 @@ const mv = async (filePath, newFilePath) => {
   fileStream.pipe(newFileStream);
 
   fileStream.on('end', async () => {
-    console.log(`File copied`);
+    console.log(`File moved`);
     await rm(filePath);
   });
 
-  fileStream.on('error', (err) => {
-    console.error('Operation failed' + err);
+  fileStream.on('error', () => {
+    console.error('Operation failed');
   });
 
-  newFileStream.on('error', (err) => {
-    console.error('Operation failed' + err);
+  newFileStream.on('error', () => {
+    console.error('Operation failed');
   });
 
   console.log(`You are currently in ${process.cwd()}`);
