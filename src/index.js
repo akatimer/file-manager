@@ -8,6 +8,7 @@ import rn from './rn/rn.js';
 import cp from './cp/cp.js';
 import mv from './mv/mv.js';
 import rm from './rm/rm.js';
+import operationSystem from './os/os.js';
 
 const fileManager = async () => {
   const userName = process.env.npm_config_username;
@@ -49,6 +50,8 @@ const fileManager = async () => {
         await mv(data.split(' ')[1], data.split(' ')[2]);
       } else if (data.startsWith('rm ')) {
         await rm(data.split(' ')[1]);
+      } else if (data.startsWith('os ')) {
+        operationSystem(data.split(' ')[1]);
       }
     } catch (err) {
       console.log('Invalid input' + err);
