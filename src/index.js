@@ -2,6 +2,7 @@ import readline from 'readline';
 import up from './up/up.js';
 import cd from './cd/cd.js';
 import ls from './ls/ls.js';
+import cat from './cat/cat.js';
 
 const fileManager = async () => {
   const userName = process.env.npm_config_username;
@@ -31,6 +32,8 @@ const fileManager = async () => {
         await cd(data.split(' ')[1]);
       } else if (data === 'ls') {
         await ls();
+      } else if (data.startsWith('cat ')) {
+        await cat(data.split(' ')[1]);
       }
     } catch {
       console.log('Invalid input');
