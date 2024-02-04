@@ -6,6 +6,8 @@ import cat from './cat/cat.js';
 import add from './add/add.js';
 import rn from './rn/rn.js';
 import cp from './cp/cp.js';
+import mv from './mv/mv.js';
+import rm from './rm/rm.js';
 
 const fileManager = async () => {
   const userName = process.env.npm_config_username;
@@ -43,9 +45,13 @@ const fileManager = async () => {
         await rn(data.split(' ')[1], data.split(' ')[2]);
       } else if (data.startsWith('cp ')) {
         await cp(data.split(' ')[1], data.split(' ')[2]);
+      } else if (data.startsWith('mv ')) {
+        await mv(data.split(' ')[1], data.split(' ')[2]);
+      } else if (data.startsWith('rm ')) {
+        await rm(data.split(' ')[1]);
       }
-    } catch {
-      console.log('Invalid input');
+    } catch (err) {
+      console.log('Invalid input' + err);
     }
   });
   rl.on('close', async () => {
