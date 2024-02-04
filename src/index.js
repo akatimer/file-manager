@@ -4,6 +4,7 @@ import cd from './cd/cd.js';
 import ls from './ls/ls.js';
 import cat from './cat/cat.js';
 import add from './add/add.js';
+import rn from './rn/rn.js';
 
 const fileManager = async () => {
   const userName = process.env.npm_config_username;
@@ -37,6 +38,8 @@ const fileManager = async () => {
         await cat(data.split(' ')[1]);
       } else if (data.startsWith('add ')) {
         await add(data.split(' ')[1]);
+      } else if (data.startsWith('rn ')) {
+        await rn(data.split(' ')[1], data.split(' ')[2]);
       }
     } catch {
       console.log('Invalid input');
