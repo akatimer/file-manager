@@ -1,5 +1,6 @@
 import readline from 'readline';
 import up from './up/up.js';
+import cd from './cd/cd.js';
 
 const fileManager = async () => {
   const userName = process.env.npm_config_username;
@@ -20,10 +21,16 @@ const fileManager = async () => {
   rl.setPrompt('file manager: >> ');
   rl.prompt();
   rl.on('line', async (data) => {
-    if (data === '.exit') {
-      rl.close();
-    } else if (data === 'up') {
-      await up();
+    try {
+      if (data === '.exit') {
+        rl.close();
+      } else if (data === 'up') {
+        await up();
+      } else if (data.startsWith('cd ')) {
+        await cd(data.split(' ')[1]);
+      }
+    } catch {
+      console.log('Invalid input');
     }
   });
   rl.on('close', async () => {
